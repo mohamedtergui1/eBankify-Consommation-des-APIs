@@ -1,0 +1,59 @@
+<div class="flex-col justify-center py-24">
+    <!-- Logo Section -->
+    <div class="flex justify-center">
+        <app-app-logo class="py-12"></app-app-logo>
+    </div>
+
+    <!-- Form Section -->
+    <div class="flex justify-center">
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-10 mx-12 w-full lg:w-1/2">
+
+            <p-inputgroup>
+                <p-inputgroup-addon>
+                    <i class="pi pi-user"></i>
+                </p-inputgroup-addon>
+                <input type="text" pInputText formControlName="name" placeholder="example@example.com" />
+            </p-inputgroup>
+            <div *ngIf="registerForm.get('name')?.invalid && registerForm.get('name')?.touched">
+                <small *ngIf="registerForm.get('name')?.errors?.['required']" class="text-red-500">
+                    name is required
+                </small>
+                <small *ngIf="registerForm.get('email')?.errors?.['email']" class="text-red-500">
+                    Invalid email format
+                </small>
+            </div>
+
+            <p-inputgroup>
+                <p-inputgroup-addon>
+                    <i class="pi pi-at"></i>
+                </p-inputgroup-addon>
+                <input type="email" pInputText formControlName="email" placeholder="example@example.com" />
+            </p-inputgroup>
+            <div *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched">
+                <small *ngIf="registerForm.get('email')?.errors?.['required']" class="text-red-500">
+                    Email is required
+                </small>
+                <small *ngIf="registerForm.get('email')?.errors?.['email']" class="text-red-500">
+                    Invalid email format
+                </small>
+            </div>
+
+
+            <p-password inputStyleClass="w-full" styleClass="w-full" placeholder="*************"
+                formControlName="password" [mediumRegex]="mediumRegex" [strongRegex]="strongRegex" [toggleMask]="true">
+            </p-password>
+            <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched">
+                <small *ngIf="registerForm.get('password')?.errors?.['required']" class="text-red-500">
+                    Password is required
+                </small>
+                <small *ngIf="registerForm.get('password')?.errors?.['pattern']" class="text-red-500">
+                    Password must include uppercase, lowercase, number, and be at least 8 characters long
+                </small>
+            </div>
+
+            <!-- Submit Button -->
+            <p-button type="submit" label="Submit" [disabled]="registerForm.invalid">
+            </p-button>
+        </form>
+    </div>
+</div>

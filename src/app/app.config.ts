@@ -7,6 +7,8 @@ import { provideClientHydration, withEventReplay } from '@angular/platform-brows
 import { FormsModule , ReactiveFormsModule } from '@angular/forms';  // Import FormsModule for ngModel support
 import Aura from '@primeng/themes/aura';
 import { InputOtpModule } from 'primeng/inputotp'; 
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { authInterceptor } from './auth.interceptor';
 export const appConfig: ApplicationConfig = {
   providers: [
     // Zone change detection configuration to coalesce events for improved performance
@@ -34,5 +36,7 @@ export const appConfig: ApplicationConfig = {
     ReactiveFormsModule
     ,
     InputOtpModule
+    ,
+    { provide: HTTP_INTERCEPTORS, useValue: authInterceptor, multi: true }
   ]
 };

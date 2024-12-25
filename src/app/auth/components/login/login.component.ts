@@ -11,11 +11,7 @@ import { RippleModule } from 'primeng/ripple';
 import { AppLogoComponent } from '../../../shared/app-logo/app-logo.component';
  
 
-interface City {
-  name: string;
-  code: string;
-}
-
+ 
 @Component({
   selector: 'app-login',
   imports: [FormsModule, InputGroupModule, InputGroupAddonModule, InputTextModule, SelectModule, InputNumberModule,PasswordModule,ButtonModule,AppLogoComponent  ],
@@ -33,3 +29,4 @@ export class LoginComponent {
 
  
 }
+   

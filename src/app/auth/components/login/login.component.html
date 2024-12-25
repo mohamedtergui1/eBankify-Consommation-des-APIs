@@ -1,19 +1,24 @@
-<div class=" flex justify-center ">
-    <div></div>
-    <app-app-logo />
-    <form class="flex flex-col gap-10 py-24 mx-12  w-full lg:w-1/2  " >
+<div class=" flex-col justify-center py-24  ">
+    <div class="flex justify-center" >
 
-        <p-inputgroup >
-            <p-inputgroup-addon>
-                <i class="pi pi-user"></i>
-            </p-inputgroup-addon>
-            <input required="true" pInputText [(ngModel)]="email" placeholder="example@ecampl.exm" />
-        </p-inputgroup>
-         
-        <p-password inputStyleClass="w-full"  styleClass = "w-full" placeholder="*************" [strongRegex]="strongRegex" [mediumRegex]="mediumRegex" [(ngModel)]="password" [toggleMask]="true" />
-        <p-button label="Submit" />
-        
-    </form>
-   
-    
+        <app-app-logo class="py-12" />
+    </div>
+    <div class=" flex justify-center ">
+
+        <form class="flex flex-col gap-10 mx-12  w-full lg:w-1/2  ">
+
+            <p-inputgroup>
+                <p-inputgroup-addon>
+                    <i class="pi pi-user"></i>
+                </p-inputgroup-addon>
+                <input required="true" pInputText [(ngModel)]="email" placeholder="example@ecampl.exm" />
+            </p-inputgroup>
+
+            <p-password inputStyleClass="w-full" styleClass="w-full" placeholder="*************"
+                [strongRegex]="strongRegex" [mediumRegex]="mediumRegex" [(ngModel)]="password" [toggleMask]="true" />
+            <p-button label="Submit" />
+
+        </form>
+    </div>
+
 </div>
