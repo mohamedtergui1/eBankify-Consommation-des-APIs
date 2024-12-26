@@ -50,6 +50,52 @@
                     Password must include uppercase, lowercase, number, and be at least 8 characters long
                 </small>
             </div>
+            <p-inputgroup>
+                <p-inputgroup-addon>
+                    <i class="pi pi-calendar"></i>
+                </p-inputgroup-addon>
+                <input type="number" pInputText formControlName="age" placeholder="Age" />
+            </p-inputgroup>
+            <div *ngIf="registerForm.get('age')?.invalid && registerForm.get('age')?.touched">
+                <small *ngIf="registerForm.get('age')?.errors?.['required']" class="text-red-500">
+                    Age is required
+                </small>
+                <small *ngIf="registerForm.get('age')?.errors?.['pattern']" class="text-red-500">
+                    Age must be a valid number
+                </small>
+            </div>
+
+            <!-- Monthly Income Input -->
+            <p-inputgroup>
+                <p-inputgroup-addon>
+                    <i class="pi pi-money-bill"></i>
+                </p-inputgroup-addon>
+                <input type="number" pInputText formControlName="monthlyIncome" placeholder="Monthly Income" />
+            </p-inputgroup>
+            <div *ngIf="registerForm.get('monthlyIncome')?.invalid && registerForm.get('monthlyIncome')?.touched">
+                <small *ngIf="registerForm.get('monthlyIncome')?.errors?.['required']" class="text-red-500">
+                    Monthly Income is required
+                </small>
+                <small *ngIf="registerForm.get('monthlyIncome')?.errors?.['pattern']" class="text-red-500">
+                    Monthly Income must be a valid number
+                </small>
+            </div>
+
+            <!-- Credit Score Input -->
+            <p-inputgroup>
+                <p-inputgroup-addon>
+                    <i class="pi pi-credit-card"></i>
+                </p-inputgroup-addon>
+                <input type="number" pInputText formControlName="creditScore" placeholder="Credit Score" />
+            </p-inputgroup>
+            <div *ngIf="registerForm.get('creditScore')?.invalid && registerForm.get('creditScore')?.touched">
+                <small *ngIf="registerForm.get('creditScore')?.errors?.['required']" class="text-red-500">
+                    Credit Score is required
+                </small>
+                <small *ngIf="registerForm.get('creditScore')?.errors?.['pattern']" class="text-red-500">
+                    Credit Score must be a valid number
+                </small>
+            </div>
 
             <!-- Submit Button -->
             <p-button type="submit" label="Submit" [disabled]="registerForm.invalid">
