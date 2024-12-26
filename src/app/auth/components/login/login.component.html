@@ -1,24 +1,47 @@
-<div class=" flex-col justify-center py-24  ">
-    <div class="flex justify-center" >
-
-        <app-app-logo class="py-12" />
+<div class="flex-col justify-center py-24">
+    <div class="flex justify-center">
+      <app-app-logo class="py-12"></app-app-logo>
     </div>
-    <div class=" flex justify-center ">
-
-        <form class="flex flex-col gap-10 mx-12  w-full lg:w-1/2  ">
-
-            <p-inputgroup>
-                <p-inputgroup-addon>
-                    <i class="pi pi-user"></i>
-                </p-inputgroup-addon>
-                <input required="true" pInputText [(ngModel)]="email" placeholder="example@ecampl.exm" />
-            </p-inputgroup>
-
-            <p-password inputStyleClass="w-full" styleClass="w-full" placeholder="*************"
-                [strongRegex]="strongRegex" [mediumRegex]="mediumRegex" [(ngModel)]="password" [toggleMask]="true" />
-            <p-button label="Submit" />
-
-        </form>
+    <div class="flex justify-center">
+      <form
+        [formGroup]="loginForm"
+        (ngSubmit)="onSubmit()"
+        class="flex flex-col gap-10 mx-12 w-full lg:w-1/2"
+      >
+        <!-- Email Input -->
+        <p-inputgroup>
+          <p-inputgroup-addon>
+            <i class="pi pi-user"></i>
+          </p-inputgroup-addon>
+          <input
+            type="email"
+            pInputText
+            formControlName="email"
+            placeholder="example@example.com"
+            [ngClass]="{'p-invalid': loginForm.get('email')?.invalid && loginForm.get('email')?.touched}"
+          />
+        </p-inputgroup>
+        <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="text-red-500 text-sm">
+          Valid email is required.
+        </div>
+  
+        <!-- Password Input -->
+        <p-password
+          formControlName="password"
+          [feedback]="false"
+          inputStyleClass="w-full"
+          styleClass="w-full"
+          placeholder="*************"
+          [toggleMask]="true"
+          [ngClass]="{'p-invalid': loginForm.get('password')?.invalid && loginForm.get('password')?.touched}"
+        ></p-password>
+        <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="text-red-500 text-sm">
+          Password must be at least 6 characters long.
+        </div>
+  
+        <!-- Submit Button -->
+        <p-button type="submit" label="Submit" [disabled]="loginForm.invalid"></p-button>
+      </form>
     </div>
-
-</div>
+  </div>
+  

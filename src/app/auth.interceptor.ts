@@ -1,32 +1,31 @@
-import { HttpInterceptorFn } from '@angular/common/http';
+import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { environment } from '../environment';
-import { catchError } from 'rxjs/operators';
-import { throwError } from 'rxjs';
 
-export const authInterceptor: HttpInterceptorFn = (req, next) => {
-  const token = localStorage.getItem('token');
-  console.log("test");
-  let clonedRequest = req;
-  
-  if (token) {
+@Injectable()
+export class AuthInterceptor implements HttpInterceptor {
+  intercept(
+    req: HttpRequest<any>,
+    next: HttpHandler
+  ): Observable<HttpEvent<any>> {
+    const token = localStorage.getItem('token');
+    let clonedRequest = req;
+
+    if (token) {
+      clonedRequest = clonedRequest.clone({
+        setHeaders: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+    }
+
+
     clonedRequest = clonedRequest.clone({
-      setHeaders: {
-        Authorization: `Bearer ${token}`,
-      },
+      url: environment.apiBaseUrl + req.url
     });
+
+
+    return next.handle(clonedRequest);
   }
-  
-  if (!/^http[s]?:\/\//.test(req.url)) {
-    clonedRequest = clonedRequest.clone({
-      url: environment.apiBaseUrl + req.url,
-    });
-  }
-  
-  return next(clonedRequest).pipe(
-    catchError(error => {
-      // Handle any errors here
-      console.error('Request error:', error);
-      return throwError(() => error);
-    })
-  );
-};
+}

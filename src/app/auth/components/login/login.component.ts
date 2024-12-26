@@ -1,32 +1,62 @@
-import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { InputGroupModule } from 'primeng/inputgroup';
-import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
-import { InputTextModule } from 'primeng/inputtext';
-import { SelectModule } from 'primeng/select';
-import { InputNumberModule } from 'primeng/inputnumber';
-import { PasswordModule } from 'primeng/password';
-import { ButtonModule } from 'primeng/button';
-import { RippleModule } from 'primeng/ripple';
-import { AppLogoComponent } from '../../../shared/app-logo/app-logo.component';
- 
-
- 
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthServiceService } from '../../service/auth-service.service';
+import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 @Component({
+  standalone: false,
   selector: 'app-login',
-  imports: [FormsModule, InputGroupModule, InputGroupAddonModule, InputTextModule, SelectModule, InputNumberModule,PasswordModule,ButtonModule,AppLogoComponent  ],
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'] // Corrected from styleUrl to styleUrls
+  styleUrls: ['./login.component.scss']
 })
 
+export class LoginComponent implements OnInit {
+  loginForm!: FormGroup;
+  loading: boolean = false
+  errorMessage: string = ""
+  constructor(private fb: FormBuilder
+    , private authSr: AuthServiceService
+    ,
+    private router: Router
+    ,private api:HttpClient
+  ) {
 
+      authSr.setApi(api)
 
-export class LoginComponent {
-  email: string | undefined;
-  password: string | undefined;
-  mediumRegex: string = "^(?=.*[a-z])(?=.*[A-Z])|(?=.*[a-z])(?=.*\\d)|(?=.*[A-Z])(?=.*\\d).{6,}$";
-  strongRegex: string = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,}$";
+   }
 
- 
+  ngOnInit(): void {
+    this.loginForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]]
+    });
+  }
+
+  onSubmit(): void {
+    if (this.loginForm.valid) {
+
+      const loginData: any = this.loginForm.value;
+      this.loading = true;
+
+      const observer = {
+        next: (v: any) => {
+          console.log('Registration successful', v);
+          this.router.navigate(['auth/login']);
+        },
+        error: (e: any) => {
+          console.error(e);
+          this.errorMessage = 'Registration failed. Please try again later.';
+        },
+        complete: () => {
+          console.info('Registration complete');
+          this.loading = false;
+        }
+      };
+
+      console.log(loginData);
+      this.authSr.login(loginData).subscribe(observer);
+    } else {
+      console.log('Formulaire invalide');
+    }
+  }
 }
-   
