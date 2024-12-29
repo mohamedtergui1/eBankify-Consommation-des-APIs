@@ -5,8 +5,9 @@ import { providePrimeNG } from 'primeng/config';
 import { routes } from './app.routes';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import Aura from '@primeng/themes/aura';
-import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptors, withRequestsMadeViaParent } from '@angular/common/http';
-import { AuthInterceptor } from './auth.interceptor';
+import {  provideHttpClient, withInterceptors } from '@angular/common/http';
+import { authInterceptor } from './auth.interceptor';
+import { MessageService } from 'primeng/api';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -24,12 +25,8 @@ export const appConfig: ApplicationConfig = {
       },
     }),
 
-    provideHttpClient(withRequestsMadeViaParent()),
+    provideHttpClient(withInterceptors([authInterceptor])),
+    MessageService
     
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptor,
-      multi: true
-    },
-  ],
+  ]
 };

@@ -24,7 +24,7 @@ export class SignUpComponent implements OnInit {
     private authService: AuthServiceService,
     private router: Router
   ) {
-    authService.setApi(api);
+    
   }
 
   ngOnInit(): void {
@@ -45,8 +45,8 @@ export class SignUpComponent implements OnInit {
 
       const observer = {
         next: (v: any) => {
-          console.log('Registration successful', v);
-          this.router.navigate(['auth/login']);
+          
+          this.router.navigate(['auth/verify']);
         },
         error: (e: any) => {
           console.error(e);
@@ -58,7 +58,6 @@ export class SignUpComponent implements OnInit {
         }
       };
 
-      console.log(registerData);
       this.authService.register(registerData).subscribe(observer);
     } else {
       console.log('Form is invalid');
