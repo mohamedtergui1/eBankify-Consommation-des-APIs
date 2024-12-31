@@ -54,7 +54,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
         messageService.add({
           severity,
           summary: severity === 'warn' ? 'Warning' : 'Error',
-          detail: errorMessages[error.status as keyof typeof errorMessages]
+          detail: error.error.message
         });
         router.navigate([route]);
       }

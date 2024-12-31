@@ -16,4 +16,13 @@ export class AuthServiceService {
   login (data:any):Observable<any>{
     return this.api.post("/auth/login",data)
   }
+
+  resendVerifyCode(data:any){
+    return this.api.post("/auth/resend",data)
+  }
+
+  verify(data:any){
+    return this.api.post("/auth/verify",data)
+
+  }
 }

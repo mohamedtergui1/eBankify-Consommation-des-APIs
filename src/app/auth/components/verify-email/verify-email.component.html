@@ -6,11 +6,11 @@
                 <p class="text-gray-600">Enter the code we sent to your email</p>
             </div>
 
-            <div class="flex justify-center items-center">
-                <p-inputotp [(ngModel)]="otb.key" size="large" class="w-full" />
+            <div class="flex justify-center items-center m-6">
+                <p-inputotp [length]="6" [(ngModel)]="otb.verificationCode" size="large" class="w-full" />
             </div>
 
-            <button class="w-full bg-indigo-600 text-white py-3 px-4 rounded-xl font-medium 
+            <button (click)="verify()" class="w-full bg-indigo-600 text-white py-3 px-4 rounded-xl font-medium 
                          hover:bg-indigo-700 transition-colors duration-200 
                          focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                 Verify Code
@@ -18,7 +18,8 @@
 
             <div class="flex items-center justify-center space-x-2">
                 <span class="text-gray-500">Didn't receive the code?</span>
-                <button class="text-indigo-600 font-semibold hover:text-indigo-800 
+                <button  (click)="resend()" 
+                class="text-indigo-600 font-semibold hover:text-indigo-800 
                              transition-colors duration-200">
                     Resend
                 </button>
