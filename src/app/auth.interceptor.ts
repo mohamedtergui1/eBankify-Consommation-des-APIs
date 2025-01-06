@@ -31,12 +31,18 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
         const percentDone = Math.round(100 * response.loaded / response.total);
         progress.updateProgress(percentDone);
       }
-      if (response?.data?.message) {
-        messageService.add({
-          severity: 'success',
-          summary: 'Success',
-          detail: response.data.message
-        });
+    
+      if (response?.data) {
+        if (response.data.message) {
+            messageService.add({
+                severity: 'success',
+                summary: 'Success',
+                detail: response.data.message
+            });
+        }
+        if (response.data.data) {
+            response.data = response.data.data;
+        }
       }
     }),
     catchError((error: HttpErrorResponse) => {

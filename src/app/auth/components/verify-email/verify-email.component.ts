@@ -1,5 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthServiceService } from '../../service/auth-service.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   standalone : false,
@@ -15,7 +17,7 @@ export class VerifyEmailComponent implements OnInit, OnDestroy {
   }
   
 
-  constructor(private authService: AuthServiceService) {}
+  constructor(private authService: AuthServiceService, private router: Router) {}
 
   ngOnInit() {
      
@@ -31,7 +33,9 @@ export class VerifyEmailComponent implements OnInit, OnDestroy {
   verify(){
     this.otb.email = "simotergui4@gmail.com"
     this.authService.verify(this.otb).subscribe(
-      
+      e => {
+        this.router.navigate(['auth']);
+      }
     )
   }
 

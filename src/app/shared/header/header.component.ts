@@ -6,17 +6,34 @@ import { AvatarModule } from 'primeng/avatar';
 import { InputTextModule } from 'primeng/inputtext';
 import { CommonModule } from '@angular/common';
 import { Ripple } from 'primeng/ripple';
-@Component({
-  selector: 'app-header',
-  imports: [Menubar, BadgeModule, AvatarModule, InputTextModule, Ripple, CommonModule],
-  templateUrl: './header.component.html',
-  styleUrl: './header.component.scss'
-})
-export class HeaderComponent implements OnInit{
-    items: MenuItem[] | undefined;
+import { RouterModule } from '@angular/router';
+import { AuthUserServiceService } from '../services/auth-user-service.service';
+import { routes } from '../../app.routes';
+import { Router } from '@angular/router';
 
-  
+@Component({
+    selector: 'app-header',
+    standalone: true,
+    imports: [Menubar, BadgeModule, AvatarModule, InputTextModule, Ripple, CommonModule, RouterModule],
+    templateUrl: './header.component.html',
+    styleUrls: ['./header.component.scss']
+})
+export class HeaderComponent implements OnInit {
+    items: MenuItem[] | undefined;
+    isAuthenticated: boolean = false;
+    constructor(private authUserService: AuthUserServiceService, private router: Router){
+    }   
     ngOnInit() {
+        this.updateMenuItems();
+
+        this.authUserService.authStatusListener.subscribe(() => {
+            this.updateMenuItems();
+        });
+    }
+
+    private updateMenuItems() {
+        this.isAuthenticated = this.authUserService.iSauthenticated();
+
         this.items = [
             {
                 label: 'Home',
@@ -47,6 +64,20 @@ export class HeaderComponent implements OnInit{
                     },
                 ],
             },
+            ...(!this.isAuthenticated ? [
+                { label: 'Login', routerLink: '/auth' },
+                { label: 'Sign Up', routerLink: '/auth/signup' }
+            ] : []),
+            ...(this.isAuthenticated ? [
+                { label: 'Profile', routerLink: '/profile' },
+                { label: 'LogOut', routerLink: '/', command: () => this.logout() }
+            ] : [])
         ];
+    }
+
+    logout(){
+        localStorage.clear()
+        this.authUserService.setToken(null)
+        this.router.navigate(['/auth']);
     }
 }

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthServiceService } from '../../service/auth-service.service';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { AuthUserServiceService } from '../../../shared/services/auth-user-service.service';
 @Component({
   standalone: false,
   selector: 'app-login',
@@ -19,6 +20,7 @@ export class LoginComponent implements OnInit {
     ,
     private router: Router
     ,private api:HttpClient
+    ,private authUser:AuthUserServiceService
   ) {
 
        
@@ -40,23 +42,20 @@ export class LoginComponent implements OnInit {
 
       const observer = {
         next: (v: any) => {
-          console.log('Registration successful', v);
-          this.router.navigate(['auth/login']);
+          console.log('Login successful', v); 
+          this.authUser.setToken(v.data.token)
+          this.router.navigate(['profile']);
         },
         error: (e: any) => {
           console.error(e);
           this.errorMessage = 'Registration failed. Please try again later.';
         },
         complete: () => {
-          console.info('Registration complete');
           this.loading = false;
         }
       };
-
-      console.log(loginData);
+ 
       this.authSr.login(loginData).subscribe(observer);
-    } else {
-      console.log('Formulaire invalide');
-    }
+    }  
   }
 }
