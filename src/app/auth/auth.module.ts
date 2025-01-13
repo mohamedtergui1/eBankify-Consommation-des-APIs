@@ -8,7 +8,6 @@ import { AuthRoutingModule } from './auth-routing.module';
 import { LoginComponent } from './components/login/login.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 
- 
 import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { InputTextModule } from 'primeng/inputtext';
@@ -21,13 +20,10 @@ import { InputOtpModule } from 'primeng/inputotp';
 // Shared Components
 import { AppLogoComponent } from '../shared/app-logo/app-logo.component';
 import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
+import { NotAuthLayoutComponent } from '../shared/not-auth-layout/not-auth-layout.component';
 
 @NgModule({
-  declarations: [
-    LoginComponent,
-    SignUpComponent,
-    VerifyEmailComponent
-  ],
+  declarations: [LoginComponent, SignUpComponent, VerifyEmailComponent],
   imports: [
     FormsModule,
     CommonModule,
@@ -37,13 +33,14 @@ import { VerifyEmailComponent } from './components/verify-email/verify-email.com
     InputGroupAddonModule,
     InputTextModule,
     SelectModule,
-    InputNumberModule,  
+    InputNumberModule,
     PasswordModule,
     ButtonModule,
     RippleModule,
     AppLogoComponent,
-    InputOtpModule ,
-    RouterModule
-  ]
+    InputOtpModule,
+    RouterModule,
+    NotAuthLayoutComponent,
+  ],
 })
-export class AuthModule { }
+export class AuthModule {}

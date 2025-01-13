@@ -14,7 +14,9 @@ export class AuthUserServiceService {
   constructor(private http: HttpClient) {
     this.getTokenFromLocalStorage();
   }
-
+  public getToken (){
+    return this.token
+  }
   private getTokenFromLocalStorage(): void {
   
     if (typeof localStorage !== 'undefined') {

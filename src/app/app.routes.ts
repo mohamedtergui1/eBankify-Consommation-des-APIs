@@ -5,19 +5,26 @@ import { HomeComponent } from './page/home/home.component';
 import { Error404Component } from './page/error/error404/error404.component';
 
 export const routes: Routes = [
-    {
-        path: "auth", loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule) 
-    }
-    ,
-    {
-        path: "" , component: HomeComponent 
-    }
-    ,
-    {
-        path: "profile" , component: ProfileComponent , canActivate: [authGuard]
-    }
-    ,
-    {
-        path: "**" , component: Error404Component 
-    }
+  {
+    path: 'auth',
+    loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
+  },
+  {
+    path: '',
+    component: HomeComponent,
+  },
+  {
+    path: 'profile',
+    component: ProfileComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'dashboard',
+    loadChildren: () =>
+      import('./dash-board/dash-board.module').then((m) => m.DashBoardModule)
+  },
+  {
+    path: '**',
+    component: Error404Component,
+  },
 ];
