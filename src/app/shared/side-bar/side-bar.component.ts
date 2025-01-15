@@ -28,6 +28,19 @@ export class SideBarComponent {
     badge: 'New'
   },
   {
+    label: 'Transactions Management',
+    route: '/dashboard/transactions',
+    icon: 'pi pi-fw pi-home',
+    badge: 'New'
+  },
+
+  {
+    label: 'Loans Management',
+    route: '/dashboard/loans',
+    icon: 'pi pi-fw pi-home',
+    badge: 'New'
+  },
+  {
     label: 'Profile',
     route: '/profile',
     icon: 'pi pi-fw pi-user',

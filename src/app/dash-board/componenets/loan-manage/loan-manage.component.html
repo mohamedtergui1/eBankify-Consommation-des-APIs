@@ -1,0 +1,12 @@
+<app-auth-layout>
+  <app-table
+    name="transition"
+    [rows]="myData"
+    [columns]="myColumns"
+    [onEdit]="editRow"
+    [onDelete]="deleteRow"
+    [onAdd]="addRow"
+    (customAction)="handleCustomAction($event)"
+  >
+  </app-table>
+</app-auth-layout>
