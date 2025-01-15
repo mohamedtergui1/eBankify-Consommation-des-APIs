@@ -1,20 +1,31 @@
 import { Component, OnInit } from '@angular/core';
+
+import { InputData } from '../../../shared/modal/modal.component';
+
 import { MangeUserService } from '../../services/mange-user.service';
+
+interface User {
+  id: number;
+  name: string;
+  email: string;
+  // Add other user properties as needed
+}
 
 @Component({
   standalone: false,
   selector: 'app-user-manage',
   templateUrl: './user-manage.component.html',
-  styleUrl: './user-manage.component.scss',
+  styleUrls: ['./user-manage.component.scss'],
 })
 export class UserManageComponent implements OnInit {
-  users!: any[];
-  isModalVisible: boolean = true;
+  users: User[] = [];
+  myData: User[] = [];
+  visible: boolean = false;
 
   constructor(private service: MangeUserService) {}
 
   ngOnInit() {
-    const observer = {
+    this.service.getAllUser().subscribe({
       next: (data: any) => {
         console.log(data);
         this.users = data.content;
@@ -26,18 +37,13 @@ export class UserManageComponent implements OnInit {
       complete: () => {
         console.log('User fetching completed');
       },
-    };
-    this.service.getAllUser().subscribe(observer);
+    });
   }
 
   onModalCallback() {}
-  showDialog() {
-    this.isModalVisible = true;
-  }
+
   onUpdate(data: number) {}
   onDelete(data: number) {}
-
-  myData = [];
 
   myColumns = [
     { field: 'id', header: 'ID' },
@@ -54,10 +60,13 @@ export class UserManageComponent implements OnInit {
   }
 
   addRow() {
-    console.log('Add row:');
+    this.visible = true;
+    console.log('Modal visibility set to:', this.visible);
   }
 
   handleCustomAction(event: any) {
     console.log('Custom action:', event);
   }
+
+  
 }

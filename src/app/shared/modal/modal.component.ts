@@ -20,7 +20,7 @@ export interface InputData {
 })
 export class ModalComponent {
 
-    @Input() visible: boolean = true;
+    @Input() visible!: boolean;
     @Input() title: string = 'Default Title';
     @Input() content: string = 'Default Content';
     @Input() inputs: Array<InputData> = []; 

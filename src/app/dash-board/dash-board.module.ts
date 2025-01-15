@@ -13,13 +13,14 @@ import { AccountManageComponent } from './componenets/account-manage/account-man
 import { TransactionManageComponent } from './componenets/transaction-manage/transaction-manage.component';
 import { TableComponent } from '../shared/table/table.component';
 import { LoanManageComponent } from './componenets/loan-manage/loan-manage.component';
+import { ModalComponent } from '../shared/modal/modal.component';
 
 @NgModule({
   declarations: [
     UserManageComponent,
     AccountManageComponent,
     TransactionManageComponent,
-    LoanManageComponent
+    LoanManageComponent 
   ],
   imports: [
     CommonModule,
@@ -31,7 +32,8 @@ import { LoanManageComponent } from './componenets/loan-manage/loan-manage.compo
     Dialog,
     ButtonModule,
     InputTextModule,
-    TableComponent
+    TableComponent,
+    ModalComponent
   ],
 })
 

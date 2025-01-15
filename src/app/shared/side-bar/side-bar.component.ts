@@ -16,29 +16,28 @@ import { RouterModule } from '@angular/router';
 export class SideBarComponent {
 
   menuItems = [{
-    label: 'users management',
+    label: 'Users Management',
     route: '/dashboard',
-    icon: 'pi pi-fw pi-home',
-    badge: 'New'
+    icon: 'pi pi-fw pi-users',
+    badge: null
   },
   {
     label: 'Accounts Management',
     route: '/dashboard/accounts',
-    icon: 'pi pi-fw pi-home',
-    badge: 'New'
+    icon: 'pi pi-fw pi-user',
+    badge: null
   },
   {
     label: 'Transactions Management',
     route: '/dashboard/transactions',
-    icon: 'pi pi-fw pi-home',
-    badge: 'New'
+    icon: 'pi pi-fw pi-exchange',
+    badge: null
   },
-
   {
     label: 'Loans Management',
     route: '/dashboard/loans',
-    icon: 'pi pi-fw pi-home',
-    badge: 'New'
+    icon: 'pi pi-fw pi-money-bill',
+    badge: null
   },
   {
     label: 'Profile',

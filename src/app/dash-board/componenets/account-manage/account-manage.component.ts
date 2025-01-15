@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AccountManageService } from '../../services/account-manage.service';
 
+import { InputData } from '../../../shared/modal/modal.component';
+
 @Component({
   selector: 'app-account-manage',
   standalone: false,
@@ -9,6 +11,7 @@ import { AccountManageService } from '../../services/account-manage.service';
 })
 export class AccountManageComponent implements OnInit {
   myData = [];
+  isModalVisible = false
 
   constructor(private service: AccountManageService) {}
 
@@ -57,6 +60,21 @@ export class AccountManageComponent implements OnInit {
 
   deleteRow(row: any) {
     console.log('Delete row:', row);
+    
+    const observer = {
+        next: (response: any) => {
+            console.log('Account deleted successfully:', response);
+            // Optionally, you can refresh the data or update the UI here
+        },
+        error: (err: any) => {
+            console.error('Error occurred while deleting account:', err);
+        },
+        complete: () => {
+            console.log('Delete request completed');
+        },
+    };
+
+    this.service.deleteAccount(row.id).subscribe(observer);
   }
 
   addRow() {
@@ -66,4 +84,7 @@ export class AccountManageComponent implements OnInit {
   handleCustomAction(event: any) {
     console.log('Custom action:', event);
   }
+
+
+ 
 }
