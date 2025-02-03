@@ -10,6 +10,7 @@ import { RouterModule } from '@angular/router';
     CommonModule
     ,
     RouterModule
+    
   ]
 })
 
@@ -33,6 +34,7 @@ export class SideBarComponent {
     icon: 'pi pi-fw pi-exchange',
     badge: null
   },
+
   {
     label: 'Loans Management',
     route: '/dashboard/loans',

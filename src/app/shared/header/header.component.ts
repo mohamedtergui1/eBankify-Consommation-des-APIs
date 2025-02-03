@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
+import { Dialog } from 'primeng/dialog';
+import { Button, ButtonModule } from 'primeng/button';
 import { Menubar } from 'primeng/menubar';
 import { BadgeModule } from 'primeng/badge';
 import { AvatarModule } from 'primeng/avatar';
@@ -10,11 +12,12 @@ import { RouterModule } from '@angular/router';
 import { AuthUserServiceService } from '../services/auth-user-service.service';
 import { routes } from '../../app.routes';
 import { Router } from '@angular/router';
+import { TransactionCartComponent } from '../transaction-cart/transaction-cart.component';
 
 @Component({
     selector: 'app-header',
     standalone: true,
-    imports: [Menubar, BadgeModule, AvatarModule, InputTextModule, Ripple, CommonModule, RouterModule],
+    imports: [Menubar, BadgeModule, AvatarModule, InputTextModule, Ripple, CommonModule, RouterModule , TransactionCartComponent ],
     templateUrl: './header.component.html',
     styleUrls: ['./header.component.scss']
 })

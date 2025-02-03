@@ -14,6 +14,10 @@ import { TransactionManageComponent } from './componenets/transaction-manage/tra
 import { TableComponent } from '../shared/table/table.component';
 import { LoanManageComponent } from './componenets/loan-manage/loan-manage.component';
 import { ModalComponent } from '../shared/modal/modal.component';
+import { SelectModule } from 'primeng/select';
+import { ConfirmDialog } from 'primeng/confirmdialog';
+import { ConfirmationService, MessageService } from 'primeng/api';
+
 
 @NgModule({
   declarations: [
@@ -32,8 +36,18 @@ import { ModalComponent } from '../shared/modal/modal.component';
     Dialog,
     ButtonModule,
     InputTextModule,
-    TableComponent,
-    ModalComponent
+    TableComponent
+    ,
+    Dialog, ButtonModule, InputTextModule, CommonModule, FormsModule 
+    ,
+    ReactiveFormsModule
+    ,
+    SelectModule
+    ,
+    ConfirmDialog
+    ,
+    
+    
   ],
 })
 

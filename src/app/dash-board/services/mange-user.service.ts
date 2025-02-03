@@ -16,7 +16,7 @@ export class MangeUserService {
   }
 
   addUser(data:any){
-    return this.api.get("/admins/users",data)
+    return this.api.post("/admins/users",data)
   }
 
   updateUser(data:any,id:number){

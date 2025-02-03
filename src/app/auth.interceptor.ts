@@ -29,6 +29,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
 
   return next(clonedRequest).pipe(
     tap((response: any) => {
+      
       if (response.type === HttpEventType.DownloadProgress) {
         const percentDone = Math.round(
           (100 * response.loaded) / response.total
@@ -41,18 +42,17 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
         );
         progress.updateProgress(percentDone);
       }
-
-      if (response?.data) {
-        if (response.data.message) {
+     
+      if (response?.body) {
+        
+        if (response.body.message) {
           messageService.add({
             severity: 'success',
             summary: 'Success',
-            detail: response.data.message,
+            detail: response.body.message,
           });
         }
-        if (response.data.data) {
-          response.data = response.data.data;
-        }
+         
       }
     }),
     catchError((error: HttpErrorResponse) => {

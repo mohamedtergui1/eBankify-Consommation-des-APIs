@@ -7,7 +7,7 @@ import { LoanManageComponent } from './componenets/loan-manage/loan-manage.compo
 
 const routes: Routes = [
   {
-    path:"" , component:UserManageComponent
+    path:"" , component: UserManageComponent
   }
   ,
   {

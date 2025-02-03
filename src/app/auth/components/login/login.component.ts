@@ -22,12 +22,12 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private api: HttpClient,
     private authUser: AuthUserServiceService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
+      password: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
 
@@ -54,5 +54,5 @@ export class LoginComponent implements OnInit {
       this.authSr.login(loginData).subscribe(observer);
     }
   }
-  
+
 }

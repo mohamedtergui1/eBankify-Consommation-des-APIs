@@ -1,0 +1,53 @@
+<div class="transaction-cart">
+  <h2>Transaction Cart</h2>
+
+  <!-- Add Transaction Form -->
+  <form [formGroup]="transactionForm" (ngSubmit)="addTransaction()">
+    <div>
+      <label for="type">Type:</label>
+      <select id="type" formControlName="type">
+        <option value="deposit">Deposit</option>
+        <option value="withdrawal">Withdrawal</option>
+        <option value="transfer">Transfer</option>
+      </select>
+    </div>
+    <div>
+      <label for="amount">Amount:</label>
+      <input id="amount" type="number" formControlName="amount" />
+    </div>
+    <div>
+      <label for="description">Description (optional):</label>
+      <input id="description" type="text" formControlName="description" />
+    </div>
+    <button type="submit" [disabled]="transactionForm.invalid">Add Transaction</button>
+  </form>
+
+  <!-- Display the list of transactions -->
+  <div *ngIf="transactions$ | async as transactions; else loading">
+    <h3>Transactions</h3>
+    <ul>
+      <li *ngFor="let transaction of transactions">
+        {{ transaction.type }}: {{ transaction.amount | currency }} ({{ transaction.date | date }})
+        <button (click)="removeTransaction(transaction.id)">Delete</button>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Display the total amount -->
+  <div *ngIf="totalAmount$ | async as totalAmount">
+    <h3>Total Amount: {{ totalAmount | currency }}</h3>
+  </div>
+
+  <!-- Display a message if the cart is empty -->
+  <div *ngIf="(transactions$ | async)?.length === 0">
+    <p>Your transaction cart is empty.</p>
+  </div>
+
+  <!-- Clear Cart Button -->
+  <button (click)="clearCart()">Clear Cart</button>
+
+  <!-- Loading State -->
+  <ng-template #loading>
+    <p>Loading transactions...</p>
+  </ng-template>
+</div>
